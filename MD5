@@ -1,4 +1,4 @@
-14fe2336cb61c75811f42798d1c23e92 *DESCRIPTION
+9656ebd4a359bba3a2f141fa9f04d7f2 *DESCRIPTION
 617358fbb06c2c4b4b11434faa776696 *NAMESPACE
 13f1471643c2cef0c9cd0c9efbe9f97f *R/convert.R
 8fdeb5f8daac2a37f154b5d16de318b9 *R/data.R
@@ -91,7 +91,7 @@ e7528f47665d5c822d8b688ee65cca28 *src/iokm/dists/hausdorff/io_hausdorff_mean.h
 fa4787536a2750195bd6d9eb0a4fba7c *src/iokm/dists/hausdorff/io_hausdorff_sum.h
 563d6b0edad4aabdfc2fad16f1d6579b *src/iokm/dists/io_euclid.h
 1fb21e252995360a534ba2c328f9ab58 *src/iokm/dists/io_hausdorff.h
-ebbb2ed699c91e15781dd9c075043535 *src/iokm/iokm.h
+78c3805383f3fdda7c1471104bf39697 *src/iokm/iokm.h
 cf68f1036c06e674661ca8910a28e3a7 *src/neokm/R_neokm.h
 c354ffe5fd7f1c1bff0d7fad1cec1857 *src/neokm/neokm.h
 4577b328d80f7f91d505074dd9502c07 *src/okm/okm.h
