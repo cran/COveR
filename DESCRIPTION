@@ -1,6 +1,6 @@
 Package: COveR
 Title: Clustering with Overlaps
-Version: 1.0.1
+Version: 1.0.3
 Authors@R: c(
   person("Guillaume", "Cleuziou", email = "guillaume.cleuziou@univ-orleans.fr", role = "cre"),
   person("Nicolas", "Hiot", email = "nicolas.hiot@etu.univ-orleans.fr", role = "aut"))
@@ -18,8 +18,8 @@ RoxygenNote: 6.0.1
 Suggests: testthat
 SystemRequirements: Gnu Scientific Library version >= 1.12
 NeedsCompilation: yes
-Packaged: 2017-11-27 13:22:28 UTC; nicolas
+Packaged: 2017-12-06 08:48:01 UTC; nicolas
 Author: Guillaume Cleuziou [cre],
   Nicolas Hiot [aut]
 Repository: CRAN
-Date/Publication: 2017-11-27 21:24:51 UTC
+Date/Publication: 2017-12-06 13:55:19 UTC
