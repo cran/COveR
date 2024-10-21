@@ -2,17 +2,20 @@
 % Please edit documentation in R/interval.R
 \name{read.interval}
 \alias{read.interval}
-\title{Interval loading.}
+\title{Reads a CSV file and converts the data into a 3D interval array.}
 \usage{
 read.interval(..., row.names = FALSE, class = NULL)
 }
 \arguments{
-\item{...}{Other options from read.}
+\item{...}{Additional arguments passed to read.csv().}
 
-\item{row.names}{Row have column names ?}
+\item{row.names}{Logical indicating if the first column contains row names.}
 
-\item{class}{The column of class (empty if not).}
+\item{class}{The column index of class labels (set to `NULL` if not present).}
+}
+\value{
+A structured interval object representing the data from the CSV file.
 }
 \description{
-Load a 3D interval array from csv.
+Reads a CSV file and converts the data into a 3D interval array.
 }

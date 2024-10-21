@@ -2,27 +2,40 @@
 % Please edit documentation in R/okm.R
 \name{okm}
 \alias{okm}
-\title{OKM clustering.}
+\title{Clusters data using the OKM (Overlapping K-Means) clustering algorithm.}
 \usage{
-okm(X, centers, iter.max = 10, nstart = 1, trace = FALSE,
-  method = "euclid")
+okm(x, centers, iter.max = 10, nstart = 1, trace = FALSE, method = "euclid")
 }
 \arguments{
-\item{X}{A data.}
+\item{x}{A numeric data matrix or data frame containing the data to be
+clustered.}
 
-\item{centers}{A number or matrix, number of cluster for clustering or pre init centers.}
+\item{centers}{Either a positive integer indicating the number of clusters to
+create or a matrix of pre-initialized cluster centers.}
 
-\item{iter.max}{the maximum number of iterations allowed.}
+\item{iter.max}{Maximum number of iterations allowed for the clustering
+algorithm (default is 10).}
 
-\item{nstart}{A number, number of execution to find the best result.}
+\item{nstart}{Number of random initializations to find the best result
+(default is 1).}
 
-\item{trace}{A boolean, tracing information on the progress of the algorithm is produced.}
+\item{trace}{Logical value indicating whether to display the progress of the
+algorithm (default is `FALSE`).}
 
-\item{method}{A string ('euclid': Euclidian distance, 'manhattan': Manhattan distance).}
+\item{method}{A string specifying the distance metric to use; options are
+'euclid' (Euclidean distance) or 'manhattan' (Manhattan distance)
+(default is "euclid").}
+}
+\value{
+A list containing the clustering results, including:
+  - `cluster`: Matrix indicating the cluster assignments for each data point.
+  - `centers`: The final cluster centers.
+  - `tot.withinss`: Total within-cluster sum of squares.
+  - `overlaps`: The measure of overlap among clusters.
 }
 \description{
-Overlapping Kmeans algorithm.
+Clusters data using the OKM (Overlapping K-Means) clustering algorithm.
 }
 \examples{
-okm(iris[,-5], 3)
+okm(iris[, -5], 3)
 }

@@ -2,28 +2,46 @@
 % Please edit documentation in R/r1okm.R
 \name{r1okm}
 \alias{r1okm}
-\title{r1okm clustering.}
+\title{Cluster data using the R1-OKM algorithm.}
 \usage{
 r1okm(x, centers, alpha = 0, nstart = 10, trace = FALSE, iter.max = 20)
 }
 \arguments{
-\item{x}{An data matrix.}
+\item{x}{A numeric data matrix or data frame containing the data to be
+clustered.}
 
-\item{centers}{A number, number of cluster for clustering or pre init centers.}
+\item{centers}{Either a positive integer indicating the number of clusters to
+create or a matrix of initial cluster centers.}
 
-\item{alpha}{A number.}
+\item{alpha}{A numeric parameter controlling the clustering behavior,
+influencing the degree of overlap between clusters (default is 0).}
 
-\item{nstart}{A number, number of execution to find the best result.}
+\item{nstart}{Number of random initializations to find the best clustering
+result (default is 10).}
 
-\item{trace}{A boolean, tracing information on the progress of the algorithm is produced.}
+\item{trace}{Logical value indicating whether to display progress information
+during execution (default is `FALSE`).}
 
-\item{iter.max}{the maximum number of iterations allowed.}
+\item{iter.max}{Maximum number of iterations allowed for the clustering
+algorithm (default is 20).}
+}
+\value{
+A list containing the clustering results, including:
+  - `cluster`: Matrix indicating the cluster assignments for each data point.
+  - `centers`: The final cluster centers.
+  - `totss`: Total sum of squares.
+  - `withinss`: Within-cluster sum of squares for each cluster.
+  - `tot.withinss`: Total within-cluster sum of squares.
+  - `betweenss`: Between-cluster sum of squares.
+  - `size`: Number of data points in each cluster.
+  - `iter`: Number of iterations performed.
+  - `overlaps`: Average number of clusters that each point overlaps with.
 }
 \description{
-Culster data with r1okm algorithm.
+Cluster data using the R1-OKM algorithm.
 }
 \examples{
-r1okm(iris[,-5], 3)
-r1okm(iris[,-5], 3, -0.5)
-r1okm(iris[,-5], iris[,-5], 1)
+r1okm(iris[, -5], 3)
+r1okm(iris[, -5], 3, alpha = -0.5)
+r1okm(iris[, -5], iris[, -5], alpha = 1)
 }

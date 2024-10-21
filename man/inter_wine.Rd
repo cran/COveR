@@ -6,7 +6,8 @@
 \title{Results of a chemical analysis of wines grown in the same region in Italy but
 derived from three different cultivars, aggregate on sulfur dioxide to
 interval simple label data.}
-\format{A interval structure with 132 rows and 10 variables divided in min
+\format{
+A interval structure with 132 rows and 10 variables divided in min
 and max with 7 class:
 \describe{
   \item{fixed.acidity}{}
@@ -30,9 +31,10 @@ Class :
   \item{Class7}{}
   \item{Class8}{}
   \item{Class9}{}
-}}
+}
+}
 \source{
-\url{https://archive.ics.uci.edu/ml/datasets.html}
+\url{https://archive.ics.uci.edu/dataset/186/wine+quality}
 }
 \usage{
 inter_wine

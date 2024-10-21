@@ -2,19 +2,28 @@
 % Please edit documentation in R/interval.R
 \name{measure}
 \alias{measure}
-\title{Visualisation of overlap by seuil.}
+\title{Plots the overlap of membership degrees in a matrix as a function of a
+threshold.}
 \usage{
 measure(x, min = 0, max = 1, step = 0.1)
 }
 \arguments{
-\item{x}{A matrix of membership degree.}
+\item{x}{A matrix of membership degrees.}
 
-\item{min}{The minimum value of degree.}
+\item{min}{Minimum threshold value for the plot (default is 0).}
 
-\item{max}{The maximum value of degree.}
+\item{max}{Maximum threshold value for the plot (default is 1).}
 
-\item{step}{The step of degree.}
+\item{step}{Step size for the threshold values (default is 0.1).}
+}
+\value{
+No return value, it plot the overlap as a function of the threshold.
 }
 \description{
-Generate plot of overlap by seuil, used to help to defined the best seuil .
+Plots the overlap of membership degrees in a matrix as a function of a
+threshold.
+}
+\examples{
+membership_matrix <- matrix(runif(20), nrow = 5)
+measure(membership_matrix, min = 0, max = 1, step = 0.2)
 }

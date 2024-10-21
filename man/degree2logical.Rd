@@ -2,15 +2,26 @@
 % Please edit documentation in R/interval.R
 \name{degree2logical}
 \alias{degree2logical}
-\title{Degree matrix to logical}
+\title{Transforms a matrix of membership degrees into a logical matrix based on a
+specified threshold.}
 \usage{
 degree2logical(x, t = min(apply(x, 1, max)))
 }
 \arguments{
-\item{x}{A matrix of membership degree.}
+\item{x}{A matrix of membership degrees.}
 
-\item{t}{The threshold to assign over.}
+\item{t}{Threshold value for converting the degrees to logical values. By
+default, it uses the minimum of the maximum values in each row.}
+}
+\value{
+A logical matrix where each element is `TRUE` if it meets or exceeds
+the threshold, and `FALSE` otherwise.
 }
 \description{
-Transform a membership degree matrix into logical matrix by threshold.
+Transforms a matrix of membership degrees into a logical matrix based on a
+specified threshold.
+}
+\examples{
+degrees <- matrix(runif(9), nrow = 3)
+degree2logical(degrees, t = 0.5)
 }

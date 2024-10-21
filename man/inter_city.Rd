@@ -4,7 +4,8 @@
 \name{inter_city}
 \alias{inter_city}
 \title{Temperature by month and humidity in european city.}
-\format{A interval structure with 68 rows and 13 variables divided in min
+\format{
+A interval structure with 68 rows and 13 variables divided in min
 and max with 17 class:
 \describe{
   \item{temp.jan}{}
@@ -41,7 +42,8 @@ Class :
   \item{Russie}{}
   \item{Turquie}{}
   \item{Ukraine}{}
-}}
+}
+}
 \usage{
 inter_city
 }

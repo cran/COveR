@@ -2,15 +2,18 @@
 % Please edit documentation in R/r1okm.R
 \name{print.r1okm}
 \alias{print.r1okm}
-\title{R1-OKM print}
+\title{Displays the results of R1-OKM clustering in a readable format.}
 \usage{
 \method{print}{r1okm}(x, ...)
 }
 \arguments{
-\item{x}{An NEOKM object.}
+\item{x}{An R1-OKM object resulting from the `r1okm` function.}
 
-\item{...}{Other options from print.}
+\item{...}{Additional arguments passed to print().}
+}
+\value{
+No return value, it prints the clustering results to the console.
 }
 \description{
-Print override for R1-OKM
+Displays the results of R1-OKM clustering in a readable format.
 }

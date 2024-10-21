@@ -1,10 +1,9 @@
 Package: COveR
 Title: Clustering with Overlaps
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: c(
-  person("Guillaume", "Cleuziou", email = "guillaume.cleuziou@univ-orleans.fr", role = "cre"),
-  person("Nicolas", "Hiot", email = "nicolas.hiot@etu.univ-orleans.fr", role = "aut"))
-Maintainer: Guillaume Cleuziou <guillaume.cleuziou@univ-orleans.fr>
+  person("Guillaume", "Cleuziou", email = "guillaume.cleuziou@univ-orleans.fr", role = "aut"),
+  person("Nicolas", "Hiot", email = "nicolas.hiot@univ-orleans.fr", role = "cre", comment = c(ORCID = "0000-0003-4318-4906")))
 Description: Provide functions for overlaps clustering, fuzzy clustering and interval-valued data manipulation. The package implement the following algorithms:
 	OKM (Overlapping Kmeans) from Cleuziou, G. (2007) <doi:10.1109/icpr.2008.4761079> ;
 	NEOKM (Non-exhaustive overlapping Kmeans) from Whang, J. J., Dhillon, I. S., and Gleich, D. F. (2015) <doi:10.1137/1.9781611974010.105> ;
@@ -14,12 +13,13 @@ Depends: R (>= 3.2.3)
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 7.3.1
 Suggests: testthat
 SystemRequirements: Gnu Scientific Library version >= 1.12
 NeedsCompilation: yes
-Packaged: 2017-12-06 08:48:01 UTC; nicolas
-Author: Guillaume Cleuziou [cre],
-  Nicolas Hiot [aut]
+Packaged: 2024-10-18 14:51:09 UTC; hiot
+Author: Guillaume Cleuziou [aut],
+  Nicolas Hiot [cre] (<https://orcid.org/0000-0003-4318-4906>)
+Maintainer: Nicolas Hiot <nicolas.hiot@univ-orleans.fr>
 Repository: CRAN
-Date/Publication: 2017-12-06 13:55:19 UTC
+Date/Publication: 2024-10-21 12:21:49 UTC

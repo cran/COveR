@@ -2,28 +2,54 @@
 % Please edit documentation in R/ikmeans.R
 \name{ikmeans}
 \alias{ikmeans}
-\title{Interval kmeans clustering.}
+\title{Performs k-means clustering on interval data, allowing for partitioning of
+data points into distinct clusters.}
 \usage{
-ikmeans(x, centers, nstart = 10, distance = "euclid", trace = FALSE,
-  iter.max = 20)
+ikmeans(
+  x,
+  centers,
+  nstart = 10,
+  distance = "euclid",
+  trace = FALSE,
+  iter.max = 20
+)
 }
 \arguments{
-\item{x}{An 3D interval array.}
+\item{x}{A 3D interval array representing the data to be clustered.}
 
-\item{centers}{A number or interval, number of cluster for clustering or pre init centers.}
+\item{centers}{Either the number of clusters to create or a set of
+pre-initialized cluster centers. If a number is provided, it specifies how
+many clusters to create.}
 
-\item{nstart}{A number, number of execution to find the best result.}
+\item{nstart}{The number of times to run the k-means algorithm with different
+starting values in order to find the best solution (default is 10).}
 
-\item{distance}{A string ('euclid': Euclidian distance, 'hausdorff': Hausdorff distance).}
+\item{distance}{A string specifying the distance metric to use: 'euclid' for
+Euclidean distance or 'hausdorff' for Hausdorff distance (default is
+'euclid').}
 
-\item{trace}{A boolean, tracing information on the progress of the algorithm is produced.}
+\item{trace}{Logical value indicating whether to show progress of the
+algorithm (default is `FALSE`).}
 
-\item{iter.max}{the maximum number of iterations allowed.}
+\item{iter.max}{Maximum number of iterations allowed for the k-means
+algorithm (default is 20).}
+}
+\value{
+A list of clustering results, including:
+  - `cluster`: A vector indicating the cluster assignment of each data point.
+  - `centers`: The final cluster centers.
+  - `totss`: Total sum of squares.
+  - `withinss`: Within-cluster sum of squares by cluster.
+  - `tot.withinss`: Total within-cluster sum of squares.
+  - `betweenss`: Between-cluster sum of squares.
+  - `size`: The number of points in each cluster.
+  - `iter`: Number of iterations the algorithm executed.
 }
 \description{
-Culster interval data with kmeans algorithm.
+Performs k-means clustering on interval data, allowing for partitioning of
+data points into distinct clusters.
 }
 \examples{
-ikmeans(iaggregate(iris, col=5), 2)
-ikmeans(iaggregate(iris, col=5), iaggregate(iris, col=5))
+ikmeans(iaggregate(iris, col = 5), 2)
+ikmeans(iaggregate(iris, col = 5), iaggregate(iris, col = 5))
 }

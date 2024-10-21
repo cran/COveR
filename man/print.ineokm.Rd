@@ -2,15 +2,18 @@
 % Please edit documentation in R/ineokm.R
 \name{print.ineokm}
 \alias{print.ineokm}
-\title{Ineokm print}
+\title{Displays the results of Neo-KM clustering in a user-friendly format.}
 \usage{
 \method{print}{ineokm}(x, ...)
 }
 \arguments{
-\item{x}{An IKmeans object.}
+\item{x}{An `ineokm` object resulting from the `ineokm` function.}
 
-\item{...}{Other options from print.}
+\item{...}{Additional arguments passed to print().}
+}
+\value{
+No return value, it prints the clustering results to the console.
 }
 \description{
-Print override for ineokm
+Displays the results of Neo-KM clustering in a user-friendly format.
 }

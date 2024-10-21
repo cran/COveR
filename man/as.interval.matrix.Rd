@@ -2,15 +2,20 @@
 % Please edit documentation in R/convert.R
 \name{as.interval.matrix}
 \alias{as.interval.matrix}
-\title{matrix to interval}
+\title{Converts a matrix to an interval object.}
 \usage{
 \method{as.interval}{matrix}(x)
 }
 \arguments{
-\item{x}{an interval.}
+\item{x}{A matrix where each pair of columns represents the minimum and
+maximum bounds of intervals.}
+}
+\value{
+An interval object constructed from the matrix.
 }
 \description{
-matrix to interval
+The number of columns in the matrix must be even, representing pairs of
+minimum and maximum values.
 }
 \examples{
 as.interval(matrix(1:12, 3, 4))

@@ -2,30 +2,57 @@
 % Please edit documentation in R/ineokm.R
 \name{ineokm}
 \alias{ineokm}
-\title{Interval neokm clustering.}
+\title{Performs clustering on interval data using the Neo-KM algorithm, which allows
+for overlapping and non-exhaustive cluster membership.}
 \usage{
-ineokm(x, centers, alpha = 0.3, beta = 0.05, nstart = 10, trace = FALSE,
-  iter.max = 20)
+ineokm(
+  x,
+  centers,
+  alpha = 0.3,
+  beta = 0.05,
+  nstart = 10,
+  trace = FALSE,
+  iter.max = 20
+)
 }
 \arguments{
-\item{x}{An 3D interval array.}
+\item{x}{A 3D interval array representing the data to be clustered.}
 
-\item{centers}{A number or interval, number of cluster for clustering or pre init centers.}
+\item{centers}{Either the number of clusters to create or a set of
+pre-initialized cluster centers. If a number is provided, it specifies how
+many clusters to create.}
 
-\item{alpha}{A number (overlap).}
+\item{alpha}{A numeric value that controls the degree of overlap between
+clusters (default is 0.3).}
 
-\item{beta}{A number (non-exhaustiveness).}
+\item{beta}{A numeric value that controls the non-exhaustiveness of clusters
+(default is 0.05).}
 
-\item{nstart}{A number, number of execution to find the best result.}
+\item{nstart}{The number of times to run the Neo-KM algorithm with different
+starting values in order to find the best solution (default is 10).}
 
-\item{trace}{A boolean, tracing information on the progress of the algorithm is produced.}
+\item{trace}{Logical value indicating whether to show the progress of the
+algorithm (default is `FALSE`).}
 
-\item{iter.max}{the maximum number of iterations allowed.}
+\item{iter.max}{Maximum number of iterations allowed for the Neo-KM algorithm
+(default is 20).}
+}
+\value{
+A list of clustering results, including:
+  - `cluster`: A vector indicating the cluster assignment of each data point.
+  - `centers`: The final cluster centers.
+  - `totss`: Total sum of squares.
+  - `withinss`: Within-cluster sum of squares by cluster.
+  - `tot.withinss`: Total within-cluster sum of squares.
+  - `betweenss`: Between-cluster sum of squares.
+  - `size`: The number of points in each cluster.
+  - `iter`: Number of iterations the algorithm executed.
 }
 \description{
-Culster interval data with neokm algorithm.
+Performs clustering on interval data using the Neo-KM algorithm, which allows
+for overlapping and non-exhaustive cluster membership.
 }
 \examples{
-ineokm(iaggregate(iris, col=5), 3)
-ineokm(iaggregate(iris, col=5), iaggregate(iris, col=5), 1, 2)
+ineokm(iaggregate(iris, col = 5), 3)
+ineokm(iaggregate(iris, col = 5), iaggregate(iris, col = 5), 1, 2)
 }

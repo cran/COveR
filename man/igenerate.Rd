@@ -2,19 +2,26 @@
 % Please edit documentation in R/interval.R
 \name{igenerate}
 \alias{igenerate}
-\title{Interval generate.}
+\title{Creates intervals from Normal Distribution using specified mean and standard
+deviation values for both the center and half-size of the intervals.}
 \usage{
 igenerate(n, ...)
 }
 \arguments{
-\item{n}{the number of elements to generate.}
+\item{n}{Number of intervals to generate.}
 
-\item{...}{Vectors (center mean, center sd, half size mean, half size sd).}
+\item{...}{Vectors representing parameters for generating intervals: each
+vector should contain four values (`center mean`, `center sd`,
+`half-size mean`, `half-size sd`).}
+}
+\value{
+An interval object containing the generated intervals.
 }
 \description{
-Generate intervals from normal law.
+Creates intervals from Normal Distribution using specified mean and standard
+deviation values for both the center and half-size of the intervals.
 }
 \examples{
-igenerate(1, c(0,1,2,1))
-igenerate(1, c(0,1,2,1), c(100,1,2,1))
+igenerate(1, c(0, 1, 2, 1))
+igenerate(1, c(0, 1, 2, 1), c(100, 1, 2, 1))
 }

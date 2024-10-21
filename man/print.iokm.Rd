@@ -2,15 +2,18 @@
 % Please edit documentation in R/iokm.R
 \name{print.iokm}
 \alias{print.iokm}
-\title{IOKM print}
+\title{Displays the results of IOKM clustering in a user-friendly format.}
 \usage{
 \method{print}{iokm}(x, ...)
 }
 \arguments{
-\item{x}{An IOKM object.}
+\item{x}{An `iokm` object resulting from the `iokm` function.}
 
-\item{...}{Other options from print.}
+\item{...}{Additional arguments passed to print().}
+}
+\value{
+No return value, it prints the clustering results to the console.
 }
 \description{
-Print override for IOKM
+Displays the results of IOKM clustering in a user-friendly format.
 }

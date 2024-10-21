@@ -1,72 +1,81 @@
-#' Interval neokm clustering.
+#' Performs clustering on interval data using the Neo-KM algorithm, which allows
+#' for overlapping and non-exhaustive cluster membership.
 #'
-#' Culster interval data with neokm algorithm.
+#' @param x A 3D interval array representing the data to be clustered.
+#' @param centers Either the number of clusters to create or a set of
+#' pre-initialized cluster centers. If a number is provided, it specifies how
+#' many clusters to create.
+#' @param alpha A numeric value that controls the degree of overlap between
+#' clusters (default is 0.3).
+#' @param beta A numeric value that controls the non-exhaustiveness of clusters
+#' (default is 0.05).
+#' @param nstart The number of times to run the Neo-KM algorithm with different
+#' starting values in order to find the best solution (default is 10).
+#' @param trace Logical value indicating whether to show the progress of the
+#' algorithm (default is `FALSE`).
+#' @param iter.max Maximum number of iterations allowed for the Neo-KM algorithm
+#' (default is 20).
+#' @return A list of clustering results, including:
+#'   - `cluster`: A vector indicating the cluster assignment of each data point.
+#'   - `centers`: The final cluster centers.
+#'   - `totss`: Total sum of squares.
+#'   - `withinss`: Within-cluster sum of squares by cluster.
+#'   - `tot.withinss`: Total within-cluster sum of squares.
+#'   - `betweenss`: Between-cluster sum of squares.
+#'   - `size`: The number of points in each cluster.
+#'   - `iter`: Number of iterations the algorithm executed.
 #' @useDynLib COveR, .registration = TRUE
-#'
-#' @param x An 3D interval array.
-#' @param centers A number or interval, number of cluster for clustering or pre init centers.
-#' @param alpha A number (overlap).
-#' @param beta A number (non-exhaustiveness).
-#' @param nstart A number, number of execution to find the best result.
-#' @param trace A boolean, tracing information on the progress of the algorithm is produced.
-#' @param iter.max the maximum number of iterations allowed.
-#'
 #' @export
-#'
 #' @examples
-#' ineokm(iaggregate(iris, col=5), 3)
-#' ineokm(iaggregate(iris, col=5), iaggregate(iris, col=5), 1, 2)
-ineokm <- function(x, centers, alpha = 0.3, beta = 0.05, nstart = 10, trace = FALSE,
-  iter.max = 20) {
+#' ineokm(iaggregate(iris, col = 5), 3)
+#' ineokm(iaggregate(iris, col = 5), iaggregate(iris, col = 5), 1, 2)
+ineokm <- function(  # nolint cyclocomp_linter
+  x, centers,
+  alpha = 0.3,
+  beta = 0.05,
+  nstart = 10,
+  trace = FALSE,
+  iter.max = 20  # nolint object_name_linter
+) {
 
-  nc <- 0
-  c <- NULL
+  # Check input validity
+  stopifnot(
+    "Data must be interval" = is.interval(x),
+    "'alpha' must be numeric" = is.numeric(alpha),
+    "'beta' must be numeric" = is.numeric(beta),
+    "'nstart' must be > 0" = is.numeric(nstart) && nstart > 0,
+    "'trace' must be logical" = is.logical(trace),
+    "'iter.max' must be > 0" = is.numeric(iter.max) && iter.max > 0
+  )
 
-  # Arguments check
-  if (!is.interval(x))
-    stop("Data must be interval")
-
-  if (is.double(centers)) {
+  # Handle centers input
+  if (is.numeric(centers)) {
     if (centers > 0 && centers <= nrow(x$inter)) {
       nc <- centers
-    } else stop("The number of clusters must be between 1 and number of row")
-
-  } else if (is.interval(centers) || is.matrix(centers) || is.vector(centers) ||
-    is.array(centers)) {
+      c <- NULL
+    } else {
+      stop("The number of clusters must be between 1 and the number of rows.")
+    }
+  } else if (is.interval(centers) || is.matrix(centers) ||
+               is.vector(centers) || is.array(centers)) {
     centers <- as.interval(centers)
-    d <- dim(centers$inter)
-    nc <- d[1]
+    if (dim(centers$inter)[3] != dim(x$inter)[3]) {
+      stop("'x' and 'centers' must have the same number of intervals.")
+    }
+    nc <- dim(centers$inter)[1]
     c <- as.numeric(as.vector(centers$inter))
-    if (d[3] != dim(x$inter)[3])
-      stop("x and centers must have the same number of intervals")
+  } else {
+    stop("'centers' must be a number, interval, vector, or matrix.")
+  }
 
-  } else stop("centers must be double, interval, vector or matrix")
-
-  if (!is.numeric(alpha))
-    stop("alpha must be numeric")
-
-  if (!is.numeric(beta))
-    stop("beta must be numeric")
-
-  if (!is.numeric(nstart))
-    stop("nstart must be numeric")
-  if (nstart <= 0)
-    stop("nstart must be positive")
-
-  if (!is.logical(trace))
-    stop("trace must be logical")
-
-  if (!is.numeric(iter.max))
-    stop("iter.max must be numeric")
-  if (iter.max <= 0)
-    stop("iter.max must be positive")
-
-  # Call
+  # Call the underlying C function for Neo-KM clustering
   d <- dim(x$inter)
   n <- dimnames(x$inter)
   v <- as.numeric(as.vector(x$inter))
-  c <- .Call("_ineokm", v, d[1], d[2], d[3], nc, alpha, beta, nstart, trace, iter.max,
-    c)
+  c <- .Call(
+    "_ineokm", v, d[1], d[2], d[3],
+    nc, alpha, beta, nstart, trace, iter.max, c
+  )
 
   # Naming
   dimnames(c[[2]]) <- list(1:nc, n[[2]], n[[3]])
@@ -74,9 +83,10 @@ ineokm <- function(x, centers, alpha = 0.3, beta = 0.05, nstart = 10, trace = FA
   # Remove empty cluster
   centers <- c[[2]][!rowSums(!is.finite(c[[2]])), , ]
 
-  # Recreate 3D array in case of 1 cluster
-  if (dim(centers)[1] == 1 && length(dim(centers)) < 3)
+  # Ensure 3D array format if there is only one cluster
+  if (dim(centers)[1] == 1 && length(dim(centers)) < 3) {
     centers <- array(as.vector(centers), dim = list(1, 2, d[3]))
+  }
 
   cluster <- c[[1]]
   centers <- as.interval(centers)
@@ -87,30 +97,37 @@ ineokm <- function(x, centers, alpha = 0.3, beta = 0.05, nstart = 10, trace = FA
   size <- as.vector(table(cluster))
   iter <- c[[6]]
 
-  # Result
-  structure(list(cluster = cluster, centers = centers, totss = totss, withinss = wss,
-    tot.withinss = totwss, betweenss = bss, size = size, iter = iter), class = "ineokm")
+  # Return the clustering results as a structured list
+  structure(list(
+    cluster = cluster,
+    centers = centers,
+    totss = totss,
+    withinss = wss,
+    tot.withinss = totwss,
+    betweenss = bss,
+    size = size,
+    iter = iter
+  ), class = "ineokm")
 }
 
-#' Ineokm print
+#' Displays the results of Neo-KM clustering in a user-friendly format.
 #'
-#' Print override for ineokm
-#'
-#' @param x An IKmeans object.
-#' @param ... Other options from print.
-#'
+#' @param x An `ineokm` object resulting from the `ineokm` function.
+#' @param ... Additional arguments passed to print().
+#' @return No return value, it prints the clustering results to the console.
 #' @export
 print.ineokm <- function(x, ...) {
-  cat("Ineokm clustering with ", length(x$size), " clusters of sizes ", paste(x$size,
-    collapse = ", "), "\n", sep = "")
-  cat("\nCluster means:\n")
+  cat("Ineokm clustering with", length(x$size), "clusters of sizes:",
+      paste(x$size, collapse = ", "), "\n")
+  cat("\nCluster centers:\n")
   print(x$centers, ...)
   cat("\nClustering vector:\n")
   print(x$cluster, ...)
-  cat("\nWithin cluster sum of squares by cluster:\n")
+  cat("\nWithin-cluster sum of squares by cluster:\n")
   print(x$withinss, ...)
-  cat(sprintf(" (between_SS / total_SS = %5.1f %%)\n", 100 * x$betweenss/x$totss),
-    "Available components:\n", sep = "\n")
+  cat(sprintf(" (Between_SS / Total_SS = %5.1f%%)\n",
+              100 * x$betweenss / x$totss))
+  cat("Available components:\n")
   print(names(x))
   invisible(x)
 }

@@ -2,17 +2,20 @@
 % Please edit documentation in R/interval.R
 \name{print.interval}
 \alias{print.interval}
-\title{Interval data print}
+\title{Custom print method for displaying interval objects in a readable format.}
 \usage{
 \method{print}{interval}(x, ...)
 }
 \arguments{
-\item{x}{an interval.}
+\item{x}{An interval object to be printed.}
 
-\item{...}{Other options from print.}
+\item{...}{Additional arguments passed to the underlying print() function.}
+}
+\value{
+No return value, it prints the interval to the console.
 }
 \description{
-Print override for interval
+Custom print method for displaying interval objects in a readable format.
 }
 \examples{
 print(inter_city)

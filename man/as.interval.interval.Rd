@@ -2,13 +2,19 @@
 % Please edit documentation in R/convert.R
 \name{as.interval.interval}
 \alias{as.interval.interval}
-\title{interval to interval}
+\title{Identity Conversion for Interval}
 \usage{
 \method{as.interval}{interval}(x)
 }
 \arguments{
-\item{x}{an interval.}
+\item{x}{An interval object.}
+}
+\value{
+The input interval object, without modification.
 }
 \description{
-interval to interval
+Identity Conversion for Interval
+}
+\examples{
+as.interval(inter_city)
 }

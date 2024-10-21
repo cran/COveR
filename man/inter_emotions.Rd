@@ -4,7 +4,8 @@
 \name{inter_emotions}
 \alias{inter_emotions}
 \title{Emotions in music aggregate on BPM to interval multi label data.}
-\format{A interval structure with 59 rows and 71 variables divided in min
+\format{
+A interval structure with 59 rows and 71 variables divided in min
 and max with 6 class:
 \describe{
   \item{Mean_Acc1298_Mean_Mem40_Centroid}{}
@@ -48,9 +49,10 @@ Class :
   \item{quiet.still}{}
   \item{sad.lonely}{}
   \item{angry.aggresive}{}
-}}
+}
+}
 \source{
-\url{http://mulan.sourceforge.net/datasets-mlc.html}
+\url{https://mulan.sourceforge.net/datasets-mlc.html}
 }
 \usage{
 inter_emotions
