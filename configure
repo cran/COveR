@@ -3141,14 +3141,13 @@ if test "${GSL_CONFIG}" != ""; then
     GSL_CFLAGS=`${GSL_CONFIG} --cflags`
     GSL_LIBS=`${GSL_CONFIG} --libs`
 else
-    as_fn_error $? "gsl-config not found, is GSL installed?" "$LINENO" 5
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: gsl-config not found, is GSL installed?" >&5
+printf "%s\n" "$as_me: WARNING: gsl-config not found, is GSL installed?" >&2;}
+    GSL_CFLAGS=""
+    GSL_LIBS=""
 fi
 
 # Now substitute these variables in src/Makevars.in to create src/Makevars
-# TODO: GSL on CRAN
-GSL_CFLAGS=""
-GSL_LIBS=""
-
 
 
 
@@ -4303,4 +4302,5 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: unrecognized options: $ac_unrecognized_opts" >&5
 printf "%s\n" "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
+
 
